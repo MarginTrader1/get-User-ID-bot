@@ -119,7 +119,7 @@ const deleteMessage = async (chatId, messageId) => {
                   disable_web_page_preview: true, // чтобы отключить предварительный просмотр ссылок
                });
             } catch (error) {
-               console.log(error.response);
+               console.log(error);
             }
             return;
          }
