@@ -80,7 +80,8 @@ const deleteMessage = async (chatId, messageId) => {
          /* Проверка на пересылку */
          if (msg.forward_origin) {
             try {
-               // запускам Telegram
+               // запускам Telegram c задержкой между запросами 5 секунд
+               await delay(5000); // 5 секунды
                const client = new TelegramClient(
                   stringSession,
                   apiId,
@@ -93,17 +94,14 @@ const deleteMessage = async (chatId, messageId) => {
                   botAuthToken: token,
                });
                console.log(client.session.save());
-            } catch (error) {
-               console.log(error);
-            }
-            try {
+
                // получение информации
                const entity = await client.getEntity(
                   msg.forward_origin.sender_user.username
                );
 
                // Задержка между запросами
-               await delay(2000); // 2 секунды
+               await delay(5000); // 5 секунды
 
                const userData = await client.invoke(
                   new Api.users.GetFullUser({
@@ -122,12 +120,10 @@ const deleteMessage = async (chatId, messageId) => {
 
                await bot.sendMessage(chatId, message, {
                   parse_mode: "HTML", // для форматирования текста
+                  disable_web_page_preview: true, // чтобы отключить предварительный просмотр ссылок
                });
-
-               // Задержка между запросами
-               await delay(2000); // 2 секунды
             } catch (error) {
-               console.log(error);
+               console.log(error.response);
             }
             return;
          }
