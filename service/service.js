@@ -124,7 +124,7 @@ export const makeMessage = (userInfo, getDateFromUnix, checkDate) => {
       } = getDateFromUnix(photoDate);
 
       messageArray.push(
-         `<b>Дата создания:</b> ~${checkDate(photoDay)}.${checkDate(
+         `<b>Дата фото:</b> ${checkDate(photoDay)}.${checkDate(
             photoMonth
          )}.${photoYear}`
       );
