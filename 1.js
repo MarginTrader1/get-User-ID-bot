@@ -295,3 +295,47 @@
   forward_date: 1722868952,
   text: 'Ванга 50к, был не прав, все же 50к было локальным дном, я сам конечно подкупил, но не много'
 }
+
+{
+
+  message_id: 213,
+
+  from: {
+
+    id: 1061235651,
+
+    is_bot: false,
+
+    first_name: 'Margin Trader',
+
+    username: 'crypto_big_boss',
+
+    language_code: 'ru',
+
+    is_premium: true
+
+  },
+
+  chat: {
+
+    id: 1061235651,
+
+    first_name: 'Margin Trader',
+
+    username: 'crypto_big_boss',
+
+    type: 'private'
+
+  },
+
+  date: 1722885234,
+
+  forward_origin: { type: 'hidden_user', sender_user_name: 'ᅠ ᅠ', date: 1720126812 },
+
+  forward_sender_name: 'ᅠ ᅠ',
+
+  forward_date: 1720126812,
+
+  text: 'Я аж спотів'
+
+}

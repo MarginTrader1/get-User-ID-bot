@@ -74,7 +74,7 @@ const deleteMessage = async (chatId, messageId) => {
          if (msg.forward_origin.type === "hidden_user") {
             await bot.sendMessage(
                chatId,
-               `Этот пользователь <b>${username}</b> скрыл информацию о своем аккаунте в настройках конфиденциальности Telegram, поэтому я не могу ничего рассказать о нем.`,
+               `Этот пользователь <b>${msg.forward_origin.sender_user_name}</b> скрыл информацию о своем аккаунте в настройках конфиденциальности Telegram, поэтому я не могу ничего рассказать о нем.`,
                {
                   parse_mode: "HTML", // для форматирования текста
                }
