@@ -286,4 +286,12 @@
   forward_date: 1722812311,
   text: 'Эх'
 
-
+  forward_origin: {
+    type: 'user',
+    sender_user: { id: 7369966194, is_bot: false, first_name: 'Олексій' },
+    date: 1722868952
+  },
+  forward_from: { id: 7369966194, is_bot: false, first_name: 'Олексій' },
+  forward_date: 1722868952,
+  text: 'Ванга 50к, был не прав, все же 50к было локальным дном, я сам конечно подкупил, но не много'
+}

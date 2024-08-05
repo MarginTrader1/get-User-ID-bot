@@ -40,8 +40,6 @@ const deleteMessage = async (chatId, messageId) => {
       connectionRetries: 5,
    });
 
-   console.log(stringSession);
-
    await client.start({
       botAuthToken: token,
    });
@@ -87,21 +85,15 @@ const deleteMessage = async (chatId, messageId) => {
          /* Проверка на пересылку */
          if (msg.forward_origin) {
             try {
-
+               console.log(`Ниже будет код для stringSession`);
                console.log(stringSession);
-               
-               await delay(4000); // 4 секунды
-               await client.connect();
-               // получение информации
 
-               console.log(msg.forward_origin.sender_user.username);
+               // Задержка между запросами
+               await delay(4000); // 4 секунды
 
                const entity = await client.getEntity(
-                  msg.forward_origin.sender_user.username
+                  msg.forward_origin.sender_user.id
                );
-
-               console.log(entity);
-
 
                // Задержка между запросами
                await delay(2000); // 2 секунды
@@ -118,8 +110,8 @@ const deleteMessage = async (chatId, messageId) => {
                   getDateFromUnix,
                   checkDate
                );
-               // console.log(userData);
-               // console.log(`Сообщение о юзере ${message}`);
+               console.log(`Ниже будет код для userData`);
+               console.log(userData);
 
                await bot.sendMessage(chatId, message, {
                   parse_mode: "HTML", // для форматирования текста
