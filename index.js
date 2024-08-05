@@ -91,7 +91,7 @@ const deleteMessage = async (chatId, messageId) => {
          if (msg.forward_origin) {
             try {
                await delay(4000); // 4 секунды
-
+               await client.connect()
                // получение информации
                const entity = await client.getEntity(
                   msg.forward_origin.sender_user.username
