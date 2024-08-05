@@ -81,7 +81,7 @@ const deleteMessage = async (chatId, messageId) => {
          if (msg.forward_origin) {
             try {
                // запускам Telegram c задержкой между запросами 5 секунд
-               await delay(5000); // 5 секунды
+               await delay(4000); // 4 секунды
                const client = new TelegramClient(
                   stringSession,
                   apiId,
@@ -101,7 +101,7 @@ const deleteMessage = async (chatId, messageId) => {
                );
 
                // Задержка между запросами
-               await delay(5000); // 5 секунды
+               await delay(2000); // 2 секунды
 
                const userData = await client.invoke(
                   new Api.users.GetFullUser({
