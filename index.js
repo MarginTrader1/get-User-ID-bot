@@ -15,22 +15,11 @@ import { token, apiHash, apiId, phoneNumber } from "./config/secret.js";
 import { makeMessage, getDateFromUnix } from "./service/service.js";
 import { checkDate } from "./checkers/checkers.js";
 
+/* Создание промиса для задержки запроса */
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /* Инициализируем бот */
 const bot = new TelegramApi(token, { polling: true });
-
-/* Функция удаления сообщений */
-const deleteMessage = async (chatId, messageId) => {
-   await bot
-      .deleteMessage(chatId, messageId)
-      .then(() => {
-         console.log("Сообщение успешно удалено");
-      })
-      .catch((error) => {
-         console.error("Ошибка при удалении сообщения:", error);
-      });
-};
 
 /* ------------------------------ ЗАПУСКАЕМ БОТА ------------------------------------------------------------------ */
 

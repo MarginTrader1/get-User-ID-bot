@@ -298,7 +298,7 @@
 
 {
 
-  message_id: 213,
+  message_id: 228,
 
   from: {
 
@@ -328,14 +328,46 @@
 
   },
 
-  date: 1722885234,
+  date: 1722886764,
 
-  forward_origin: { type: 'hidden_user', sender_user_name: 'ᅠ ᅠ', date: 1720126812 },
+  forward_origin: {
 
-  forward_sender_name: 'ᅠ ᅠ',
+    type: 'user',
 
-  forward_date: 1720126812,
+    sender_user: {
 
-  text: 'Я аж спотів'
+      id: 703102284,
+
+      is_bot: false,
+
+      first_name: 'Добрый',
+
+      last_name: 'Волшебник',
+
+      username: 'my_life_is_a_magic'
+
+    },
+
+    date: 1717535413
+
+  },
+
+  forward_from: {
+
+    id: 703102284,
+
+    is_bot: false,
+
+    first_name: 'Добрый',
+
+    last_name: 'Волшебник',
+
+    username: 'my_life_is_a_magic'
+
+  },
+
+  forward_date: 1717535413,
+
+  text: 'Смело'
 
 }

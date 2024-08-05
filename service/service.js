@@ -85,10 +85,13 @@ export const makeMessage = (userInfo, getDateFromUnix, checkDate) => {
 
    // блок проверок
    if (id) {
-      messageArray.push(`<b>ID:</b> ${id}`);
+      messageArray.push(`<b>ID:</b> <code>${id}</code>`);
    }
    if (firstName) {
       messageArray.push(`<b>Имя:</b> ${firstName}`);
+   }
+   if (lastName) {
+      messageArray.push(`<b>Фамилия:</b> ${lastName}`);
    }
    if (username) {
       messageArray.push(`<b>Username:</b> @${username}`);
@@ -115,6 +118,9 @@ export const makeMessage = (userInfo, getDateFromUnix, checkDate) => {
    if (premium) {
       messageArray.push(`<b>Есть премиум:</b> ${premium}`);
    }
+   if (langCode) {
+      messageArray.push(`<b>Язык:</b> ${langCode}`);
+   }
    if (photoDate) {
       messageArray.push(
          `<b>Дата создания:</b> ~${checkDate(photoDay)}.${checkDate(
@@ -134,6 +140,9 @@ export const makeMessage = (userInfo, getDateFromUnix, checkDate) => {
             channelMonth
          )}.${channelYear}`
       );
+   }
+   if (scam) {
+      messageArray.push(`<b>Метка scam:</b> @${scam}`);
    }
 
    return messageArray.join("\n");
