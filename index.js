@@ -93,14 +93,16 @@ const bot = new TelegramApi(token, { polling: true });
                   })
                );
 
+               console.log(`Ниже будет код для объекта User`);
+               console.log(userData);
+
                // проверка ответа с сервера TG и создание сообщения
                const message = makeMessage(
                   userData,
                   getDateFromUnix,
                   checkDate
                );
-               console.log(`Ниже будет код для userData`);
-               console.log(userData);
+               
 
                await bot.sendMessage(chatId, message, {
                   parse_mode: "HTML", // для форматирования текста

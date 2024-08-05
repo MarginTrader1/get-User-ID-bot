@@ -34,7 +34,7 @@ export const makeMessage = (userInfo, getDateFromUnix, checkDate) => {
          id,
          about,
          birthday,
-         profilePhoto: { date: photoDate },
+         profilePhoto,
          personalChannelId,
          personalChannelMessage,
       },
@@ -70,12 +70,6 @@ export const makeMessage = (userInfo, getDateFromUnix, checkDate) => {
 
    // Оператор нулевого слияния (??): Если результат опциональной цепочки равен undefined или null,
    // оператор нулевого слияния заменяет его на пустой объект {}, чтобы избежать ошибки деструктуризации.
-
-   const {
-      day: photoDay,
-      month: photoMonth,
-      year: photoYear,
-   } = getDateFromUnix(photoDate);
 
    const {
       day: channelDay,
@@ -121,7 +115,14 @@ export const makeMessage = (userInfo, getDateFromUnix, checkDate) => {
    if (langCode) {
       messageArray.push(`<b>Язык:</b> ${langCode}`);
    }
-   if (photoDate) {
+   if (profilePhoto) {
+      const { date: photoDate } = profilePhoto;
+      const {
+         day: photoDay,
+         month: photoMonth,
+         year: photoYear,
+      } = getDateFromUnix(photoDate);
+
       messageArray.push(
          `<b>Дата создания:</b> ~${checkDate(photoDay)}.${checkDate(
             photoMonth
