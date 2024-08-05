@@ -15,12 +15,12 @@ import { Api } from "telegram/tl/index.js";
 
 /* Токены для доступа к ботам */
 import { token, apiHash, apiId, phoneNumber } from "./config/secret.js";
+
+/* Импорт вспомогательных функций */
 import { makeMessage, getDateFromUnix } from "./service/service.js";
+import { checkDate } from "./checkers/checkers.js";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-/* Пользователь в поиске */
-let userInfo = {};
 
 /* Инициализируем бот */
 const bot = new TelegramApi(token, { polling: true });
@@ -49,12 +49,9 @@ const deleteMessage = async (chatId, messageId) => {
          console.log(msg);
 
          const message = msg.text;
-         const { message_id } = msg;
          const chatType = msg.chat.type;
          const chatId = msg.chat.id;
          const name = msg.from.first_name;
-         const username = msg.from.username;
-         const channel = msg.sender_chat;
 
          /* Проверка на команду /start */
          if (message === "/start" && chatType === "private") {
@@ -72,7 +69,7 @@ const deleteMessage = async (chatId, messageId) => {
          if (msg.forward_origin.type === "hidden_user") {
             await bot.sendMessage(
                chatId,
-               `Этот пользователь <b>${msg.forward_origin.sender_user_name}</b> скрыл информацию о своем аккаунте в настройках конфиденциальности Telegram, поэтому я не могу ничего рассказать о нем.`,
+               `Этот пользователь <b>${username}</b> скрыл информацию о своем аккаунте в настройках конфиденциальности Telegram, поэтому я не могу ничего рассказать о нем.`,
                {
                   parse_mode: "HTML", // для форматирования текста
                }
@@ -106,7 +103,11 @@ const deleteMessage = async (chatId, messageId) => {
                );
 
                // проверка ответа с сервера TG и создание сообщения
-               const message = makeMessage(userData, getDateFromUnix);
+               const message = makeMessage(
+                  userData,
+                  getDateFromUnix,
+                  checkDate
+               );
 
                // console.log(`Сообщение о юзере ${message}`);
 

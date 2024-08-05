@@ -27,7 +27,7 @@ export const getPhotoFileId = (index, array) => {
 // функция makeMessage для проверки ключей с ответа с сервера Telegram
 // и формирования ответа по пользователю
 
-export const makeMessage = (userInfo, getDateFromUnix) => {
+export const makeMessage = (userInfo, getDateFromUnix, checkDate) => {
    let messageArray = [];
    const {
       fullUser: {
@@ -97,17 +97,29 @@ export const makeMessage = (userInfo, getDateFromUnix) => {
       messageArray.push(`<b>Описание:</b> ${about}`);
    }
    if (phone) {
-      messageArray.push(`<b>Телефон:</b> ${phone}`);
+      messageArray.push(`<b>Телефон:</b> +${phone}`);
    }
    if (birthday) {
-      messageArray.push(`<b>Дата рождения:</b> ${birthday}`);
+      const {
+         day: birthdayDay,
+         month: birthdayMonth,
+         year: birthdayYear,
+      } = birthday;
+
+      messageArray.push(
+         `<b>Дата рождения:</b> ${checkDate(birthdayDay)}.${checkDate(
+            birthdayMonth
+         )}.${checkDate(birthdayYear)}`
+      );
    }
    if (premium) {
       messageArray.push(`<b>Есть премиум:</b> ${premium}`);
    }
    if (photoDate) {
       messageArray.push(
-         `<b>Дата создания:</b> ${photoDay}.${photoMonth}.${photoYear} `
+         `<b>Дата создания:</b> ~${checkDate(photoDay)}.${checkDate(
+            photoMonth
+         )}.${photoYear}`
       );
    }
    if (title) {
@@ -118,7 +130,9 @@ export const makeMessage = (userInfo, getDateFromUnix) => {
    }
    if (channelDate) {
       messageArray.push(
-         `<b>Дата создания:</b> ${channelDay}.${channelMonth}.${channelYear}`
+         `<b>Дата создания:</b> ${checkDate(channelDay)}.${checkDate(
+            channelMonth
+         )}.${channelYear}`
       );
    }
 
