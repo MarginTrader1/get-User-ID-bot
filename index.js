@@ -16,6 +16,10 @@ import { Api } from "telegram/tl/index.js";
 /* Токены для доступа к ботам */
 import { token, apiHash, apiId, phoneNumber } from "./config/secret.js";
 
+const client = new TelegramClient(stringSession, apiId, apiHash, {
+   connectionRetries: 5,
+});
+
 /* Импорт вспомогательных функций */
 import { makeMessage, getDateFromUnix } from "./service/service.js";
 import { checkDate } from "./checkers/checkers.js";
@@ -40,6 +44,12 @@ const deleteMessage = async (chatId, messageId) => {
 /* ------------------------------ ЗАПУСКАЕМ БОТА ------------------------------------------------------------------ */
 
 (async () => {
+   // запускам Telegram
+   await client.start({
+      botAuthToken: token,
+   });
+   console.log(client.session.save());
+
    /* Список команд для бота */
    bot.setMyCommands([{ command: "/start", description: "Старт" }]);
 
@@ -80,20 +90,7 @@ const deleteMessage = async (chatId, messageId) => {
          /* Проверка на пересылку */
          if (msg.forward_origin) {
             try {
-               // запускам Telegram c задержкой между запросами 5 секунд
                await delay(4000); // 4 секунды
-               const client = new TelegramClient(
-                  stringSession,
-                  apiId,
-                  apiHash,
-                  {
-                     connectionRetries: 5,
-                  }
-               );
-               await client.start({
-                  botAuthToken: token,
-               });
-               console.log(client.session.save());
 
                // получение информации
                const entity = await client.getEntity(
@@ -115,8 +112,8 @@ const deleteMessage = async (chatId, messageId) => {
                   getDateFromUnix,
                   checkDate
                );
-
-               // console.log(`Сообщение о юзере ${message}`);
+               console.log(userData);
+               console.log(`Сообщение о юзере ${message}`);
 
                await bot.sendMessage(chatId, message, {
                   parse_mode: "HTML", // для форматирования текста
