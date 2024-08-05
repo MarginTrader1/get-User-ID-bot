@@ -3,22 +3,13 @@ import TelegramApi from "node-telegram-bot-api";
 /* блок импортов для GramJS */
 import { TelegramClient } from "telegram";
 import { StringSession } from "telegram/sessions/index.js";
-import readline from "readline";
 
-const stringSession = new StringSession("");
-const rl = readline.createInterface({
-   input: process.stdin,
-   output: process.stdout,
-});
+let stringSession = new StringSession("");
 
 import { Api } from "telegram/tl/index.js";
 
 /* Токены для доступа к ботам */
 import { token, apiHash, apiId, phoneNumber } from "./config/secret.js";
-
-const client = new TelegramClient(stringSession, apiId, apiHash, {
-   connectionRetries: 5,
-});
 
 /* Импорт вспомогательных функций */
 import { makeMessage, getDateFromUnix } from "./service/service.js";
@@ -45,6 +36,14 @@ const deleteMessage = async (chatId, messageId) => {
 
 (async () => {
    // запускам Telegram
+   const client = new TelegramClient(stringSession, apiId, apiHash, {
+      connectionRetries: 5,
+   });
+
+   console.log(
+      `Значение stringSession во время запуска бота ${stringSession} `
+   );
+
    await client.start({
       botAuthToken: token,
    });
@@ -91,7 +90,7 @@ const deleteMessage = async (chatId, messageId) => {
          if (msg.forward_origin) {
             try {
                await delay(4000); // 4 секунды
-               await client.connect()
+               await client.connect();
                // получение информации
                const entity = await client.getEntity(
                   msg.forward_origin.sender_user.username
@@ -112,8 +111,8 @@ const deleteMessage = async (chatId, messageId) => {
                   getDateFromUnix,
                   checkDate
                );
-               console.log(userData);
-               console.log(`Сообщение о юзере ${message}`);
+               // console.log(userData);
+               // console.log(`Сообщение о юзере ${message}`);
 
                await bot.sendMessage(chatId, message, {
                   parse_mode: "HTML", // для форматирования текста
