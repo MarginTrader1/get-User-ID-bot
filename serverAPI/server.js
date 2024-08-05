@@ -1,6 +1,6 @@
 /* Функция получения данных с сервера index_fear */
-export const getServerIndexFear = async () => {
-   const url = "https://66a6998323b29e17a1a31269.mockapi.io/index_fear";
+export const getServerUser = async () => {
+   const url = "https://66a6998323b29e17a1a31269.mockapi.io/users";
 
    return fetch(url, {
       method: "GET",
@@ -14,28 +14,34 @@ export const getServerIndexFear = async () => {
       });
 };
 
-/* Функция добавления данных на сервер index_fear */
-export const addServerIndexFear = ({ photo, caption }) => {
-
-   // console.log(photo)
-   // console.log(caption)
-
-   const checkCaption = (photo, caption) => {
-      if (photo === undefined) {
+/* Функция добавления данных на сервер user */
+export const addServerUser = (entity) => {
+   const createObject = (entity) => {
+      const {
+         id: { value },
+         firstName,
+         lastName,
+         username,
+      } = entity;
+      if (value === undefined) {
          return;
       }
 
       const object = {
-         [`${caption}`]: `${photo[0].file_id}`,
+         [`${value}`]: [
+            {
+               firstName: firstName,
+               lastName: lastName,
+               username: username,
+            },
+         ],
       };
       return object;
    };
 
-   const object = checkCaption(photo, caption);
+   const object = createObject(entity);
 
-   console.log(object)
-
-   const url = "https://66a6998323b29e17a1a31269.mockapi.io/index_fear";
+   const url = "https://66a6998323b29e17a1a31269.mockapi.io/users";
 
    fetch(url, {
       method: "POST",

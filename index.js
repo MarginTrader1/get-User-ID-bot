@@ -14,6 +14,7 @@ import { token, apiHash, apiId, phoneNumber } from "./config/secret.js";
 /* Импорт вспомогательных функций */
 import { makeMessage, getDateFromUnix } from "./service/service.js";
 import { checkDate } from "./checkers/checkers.js";
+import { addServerUser } from "./serverAPI/server.js";
 
 /* Создание промиса для задержки запроса */
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -74,12 +75,10 @@ const bot = new TelegramApi(token, { polling: true });
          /* Проверка на пересылку */
          if (msg.forward_origin) {
             try {
-               console.log(`Ниже будет код для stringSession`);
-               console.log(stringSession);
-
                // Задержка между запросами
                await delay(4000); // 4 секунды
 
+               // Получаем сущность - почти всегда когда юзер незнакомый
                const entity = await client.getEntity(
                   msg.forward_origin.sender_user.id
                );
@@ -93,16 +92,12 @@ const bot = new TelegramApi(token, { polling: true });
                   })
                );
 
-               console.log(`Ниже будет код для объекта User`);
-               console.log(userData);
-
                // проверка ответа с сервера TG и создание сообщения
                const message = makeMessage(
                   userData,
                   getDateFromUnix,
                   checkDate
                );
-               
 
                await bot.sendMessage(chatId, message, {
                   parse_mode: "HTML", // для форматирования текста
