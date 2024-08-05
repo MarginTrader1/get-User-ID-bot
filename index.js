@@ -15,7 +15,7 @@ import { Api } from "telegram/tl/index.js";
 
 /* Токены для доступа к ботам */
 import { token, apiHash, apiId, phoneNumber } from "./config/secret.js";
-import { getDateFromUnix } from "./service/service.js";
+import { makeMessage, getDateFromUnix } from "./service/service.js";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -105,82 +105,14 @@ const deleteMessage = async (chatId, messageId) => {
                   })
                );
 
-               userInfo = userData;
-               console.log(userData);
+               // проверка ответа с сервера TG и создание сообщения
+               const message = makeMessage(userData, getDateFromUnix);
 
-               const {
-                  fullUser: {
-                     id,
-                     about,
-                     birthday,
-                     profilePhoto: { date: photoDate },
-                     personalChannelId,
-                     personalChannelMessage,
-                  },
-                  chats,
-                  users,
-               } = userInfo;
+               // console.log(`Сообщение о юзере ${message}`);
 
-               // переменные для аккаунта позьзователя
-               const {
-                  deleted,
-                  bot: userBot,
-                  premium,
-                  id: usersId,
-                  firstName,
-                  lastName,
-                  username,
-                  phone,
-                  status,
-                  langCode,
-                  emojiStatus,
-                  usernames,
-               } = users[0];
-
-               // переменные для каналов пользователя
-               const {
-                  scam,
-                  id: channelId,
-                  title,
-                  username: channelName,
-                  date: channelDate,
-                  usernames: channelUsernames,
-               } = chats?.[0] ?? {};
-
-               // Оператор нулевого слияния (??): Если результат опциональной цепочки равен undefined или null,
-               // оператор нулевого слияния заменяет его на пустой объект {}, чтобы избежать ошибки деструктуризации.
-
-               const {
-                  day: photoDay,
-                  month: photoMonth,
-                  year: photoYear,
-               } = getDateFromUnix(photoDate);
-
-               const {
-                  day: channelDay,
-                  month: channelMonth,
-                  year: channelYear,
-               } = getDateFromUnix(channelDate);
-
-               await bot.sendMessage(
-                  chatId,
-                  `Я нашел такую информацию о пользователе:\n
-<b>ID:</b> ${id}
-<b>Имя:</b> ${firstName}
-<b>Username:</b> @${username}
-<b>Описание:</b> ${about}
-<b>Телефон:</b> ${phone}
-<b>Дата рождения:</b> ${birthday}
-<b>Есть премиум:</b> ${premium}
-<b>Дата создания:</b> ${photoDay}.${photoMonth}.${photoYear} 
-                  
-<b>Канал:</b> ${title}
-<b>Username:</b> @${channelName}
-<b>Дата создания:</b> ${channelDay}.${channelMonth}.${channelYear}`,
-                  {
-                     parse_mode: "HTML", // для форматирования текста
-                  }
-               );
+               await bot.sendMessage(chatId, message, {
+                  parse_mode: "HTML", // для форматирования текста
+               });
 
                // Задержка между запросами
                await delay(2000); // 2 секунды
