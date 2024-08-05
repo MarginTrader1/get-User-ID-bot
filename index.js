@@ -79,14 +79,23 @@ const deleteMessage = async (chatId, messageId) => {
 
          /* Проверка на пересылку */
          if (msg.forward_origin) {
-            // запускам Telegram
-            const client = new TelegramClient(stringSession, apiId, apiHash, {
-               connectionRetries: 5,
-            });
-            await client.start({
-               botAuthToken: token,
-            });
-            console.log(client.session.save());
+            try {
+               // запускам Telegram
+               const client = new TelegramClient(
+                  stringSession,
+                  apiId,
+                  apiHash,
+                  {
+                     connectionRetries: 5,
+                  }
+               );
+               await client.start({
+                  botAuthToken: token,
+               });
+               console.log(client.session.save());
+            } catch (error) {
+               console.log(error);
+            }
             try {
                // получение информации
                const entity = await client.getEntity(
