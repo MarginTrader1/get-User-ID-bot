@@ -83,6 +83,9 @@ const bot = new TelegramApi(token, { polling: true });
                   msg.forward_origin.sender_user.id
                );
 
+               // добавления юзера в базу данных
+               addServerUser(entity)
+
                // Задержка между запросами
                await delay(2000); // 2 секунды
 

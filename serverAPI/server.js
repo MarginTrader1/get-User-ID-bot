@@ -1,6 +1,6 @@
 /* Функция получения данных с сервера index_fear */
 export const getServerUser = async () => {
-   const url = "https://66a6998323b29e17a1a31269.mockapi.io/users";
+   const url = "https://66a6998323b29e17a1a31269.mockapi.io/users/:1";
 
    return fetch(url, {
       method: "GET",
@@ -41,10 +41,10 @@ export const addServerUser = (entity) => {
 
    const object = createObject(entity);
 
-   const url = "https://66a6998323b29e17a1a31269.mockapi.io/users";
+   const url = "https://66a6998323b29e17a1a31269.mockapi.io/users/:1";
 
    fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: {
          "Content-Type": "application/json",
       },
