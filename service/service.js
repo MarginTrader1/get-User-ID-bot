@@ -174,10 +174,10 @@ export const makeStandartMessage = (
       messageArray.push(`├<b>last name:</b> ${from.last_name}`);
    }
    if (from.username) {
-      messageArray.push(`├<b>username:</b> @${username}`);
+      messageArray.push(`├<b>username:</b> @${from.username}`);
    }
    if (from.language_code) {
-      messageArray.push(`├<b>language:</b> ${language_code}`);
+      messageArray.push(`├<b>language:</b> ${from.language_code}`);
    }
    if (from.is_premium) {
       messageArray.push(`└<b>is premium:</b> ${from.is_premium}\n`);
@@ -202,7 +202,7 @@ export const makeStandartMessage = (
       messageArray.push(`├<b>username:</b> @${forward_from.username}`);
    }
    if (forward_from.language_code) {
-      messageArray.push(`├<b>language:</b> ${language_code}`);
+      messageArray.push(`├<b>language:</b> ${forward_from.language_code}`);
    }
    if (forward_from.is_premium) {
       messageArray.push(`└<b>is premium:</b> ${forward_from.is_premium}\n`);
