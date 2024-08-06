@@ -82,7 +82,7 @@ const bot = new TelegramApi(token, { polling: true });
          }
 
          /* Проверка на пересылку */
-         if (msg.forward_origin) {
+         if (msg.forward_origin && chatType === "private") {
             try {
                const standartMessage = makeStandartMessage(
                   msg,
@@ -114,9 +114,10 @@ const bot = new TelegramApi(token, { polling: true });
 
          const data = query.data;
          const chatId = query.from.id;
+         const chatType = msg.chat.type;
 
          /* Кнопка - вернуться назад */
-         if (data === "/more_info") {
+         if (data === "/more_info" && chatType === "private") {
             // id из базы данных
             const user_id = user_id_database[chatId];
 
@@ -145,6 +146,10 @@ const bot = new TelegramApi(token, { polling: true });
                parse_mode: "HTML", // для форматирования текста
                disable_web_page_preview: true, // чтобы отключить предварительный просмотр ссылок
             });
+
+            // сброс значения базы данных
+            user_id_database[chatId] = "";
+
             return;
          }
       } catch (error) {}
