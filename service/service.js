@@ -176,7 +176,8 @@ export const makeStandartMessage = (
       messageArray.push(`├<b>language:</b> ${from.language_code}`);
    }
    if (true) {
-      messageArray.push(`└<b>is premium:</b> ${from.is_premium}\n`);
+      const isPremium = from.is_premium ? true : false;
+      messageArray.push(`└<b>is premium:</b> ${isPremium}\n`);
    }
 
    // блок проверок forward_from - от кого сообщение
@@ -197,16 +198,17 @@ export const makeStandartMessage = (
       messageArray.push(`├<b>language:</b> ${forward_from.language_code}`);
    }
    if (true) {
-      messageArray.push(`└<b>is premium:</b> ${forward_from.is_premium}\n`);
+      const isPremium = from.is_premium ? true : false;
+      messageArray.push(`└<b>is premium:</b> ${isPremium}\n`);
    }
 
    // date
    if (forward_date) {
       const { day, month, year } = getDateFromUnix(forward_date);
       messageArray.push(
-         `📃 <b>Message</b>\n└<b>message date:</b> ${checkDate(day)}.${checkDate(
-            month
-         )}.${checkDate(year)}\n`
+         `📃 <b>Message</b>\n└<b>message date:</b> ${checkDate(
+            day
+         )}.${checkDate(month)}.${checkDate(year)}\n`
       );
    }
 
