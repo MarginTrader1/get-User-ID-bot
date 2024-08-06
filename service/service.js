@@ -148,3 +148,75 @@ export const makeMessage = (userInfo, getDateFromUnix, checkDate) => {
 
    return messageArray.join("\n");
 };
+
+// стандартное сообщение при получении сообщения
+export const makeStandartMessage = (
+   dataMessage,
+   getDateFromUnix,
+   checkDate
+) => {
+   let messageArray = [];
+
+   const { from, chat, date, forward_origin, forward_from, forward_date } =
+      dataMessage;
+
+   // блок проверок from - кто прислал
+   if (from.id) {
+      messageArray.push(`👤 You\n├<b>id:</b> <code>${from.id}</code>`);
+   }
+   if (from.is_bot) {
+      messageArray.push(`├<b>is bot:</b> ${from.is_bot}`);
+   }
+   if (from.first_name) {
+      messageArray.push(`├<b>first name:</b> ${from.first_name}`);
+   }
+   if (from.last_name) {
+      messageArray.push(`├<b>last name:</b> ${from.last_name}`);
+   }
+   if (from.username) {
+      messageArray.push(`├<b>username:</b> @${username}`);
+   }
+   if (from.language_code) {
+      messageArray.push(`├<b>language:</b> ${language_code}`);
+   }
+   if (from.is_premium) {
+      messageArray.push(`└<b>is premium:</b> ${from.is_premium}\n`);
+   }
+
+   // блок проверок forward_from - от кого сообщение
+   if (forward_from.id) {
+      messageArray.push(
+         `👤 Forward message\n<b>id:</b> <code>${forward_from.id}</code>`
+      );
+   }
+   if (forward_from.is_bot) {
+      messageArray.push(`├<b>is bot:</b> ${forward_from.is_bot}`);
+   }
+   if (forward_from.first_name) {
+      messageArray.push(`├<b>first name:</b> ${forward_from.first_name}`);
+   }
+   if (forward_from.last_name) {
+      messageArray.push(`├<b>last name:</b> ${forward_from.last_name}`);
+   }
+   if (forward_from.username) {
+      messageArray.push(`├<b>username:</b> @${username}`);
+   }
+   if (forward_from.language_code) {
+      messageArray.push(`├<b>language:</b> ${language_code}`);
+   }
+   if (forward_from.is_premium) {
+      messageArray.push(`└<b>is premium:</b> ${forward_from.is_premium}\n`);
+   }
+
+   // date
+   if (forward_date) {
+      const { day, month, year } = getDateFromUnix(forward_date);
+      messageArray.push(
+         `└📃 Message\n<b>└message date:</b> ${checkDate(day)}.${checkDate(
+            month
+         )}.${checkDate(year)}\n`
+      );
+   }
+
+   return messageArray.join("\n");
+};

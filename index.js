@@ -12,7 +12,11 @@ import { Api } from "telegram/tl/index.js";
 import { token, apiHash, apiId, phoneNumber } from "./config/secret.js";
 
 /* Импорт вспомогательных функций */
-import { makeMessage, getDateFromUnix } from "./service/service.js";
+import {
+   makeMessage,
+   getDateFromUnix,
+   makeStandartMessage,
+} from "./service/service.js";
 import { checkDate } from "./checkers/checkers.js";
 import { addServerUser } from "./serverAPI/server.js";
 
@@ -41,7 +45,7 @@ const bot = new TelegramApi(token, { polling: true });
    /* Чтение сообщений */
    bot.on("message", async (msg) => {
       try {
-         // console.log(msg);
+         console.log(msg);
 
          const message = msg.text;
          const chatType = msg.chat.type;
@@ -75,6 +79,11 @@ const bot = new TelegramApi(token, { polling: true });
          /* Проверка на пересылку */
          if (msg.forward_origin) {
             try {
+               const standartMessage = makeStandartMessage(msg);
+               await bot.sendMessage(chatId, standartMessage, {
+                  parse_mode: "HTML", // для форматирования текста
+               });
+
                // Задержка между запросами
                await delay(4000); // 4 секунды
 
@@ -84,7 +93,7 @@ const bot = new TelegramApi(token, { polling: true });
                );
 
                // добавления юзера в базу данных
-               addServerUser(entity)
+               addServerUser(entity);
 
                // Задержка между запросами
                await delay(2000); // 2 секунды
