@@ -212,7 +212,7 @@ export const makeStandartMessage = (
    if (forward_date) {
       const { day, month, year } = getDateFromUnix(forward_date);
       messageArray.push(
-         `└📃 Message\n<b>└message date:</b> ${checkDate(day)}.${checkDate(
+         `📃 Message\n└<b>message date:</b> ${checkDate(day)}.${checkDate(
             month
          )}.${checkDate(year)}\n`
       );
