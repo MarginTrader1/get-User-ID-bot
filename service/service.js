@@ -186,7 +186,7 @@ export const makeStandartMessage = (
    // блок проверок forward_from - от кого сообщение
    if (forward_from.id) {
       messageArray.push(
-         `👤 Forward message\n<b>id:</b> <code>${forward_from.id}</code>`
+         `👤 Forward message\n├<b>id:</b> <code>${forward_from.id}</code>`
       );
    }
    if (forward_from.is_bot) {
