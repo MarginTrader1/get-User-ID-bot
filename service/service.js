@@ -161,13 +161,9 @@ export const makeStandartMessage = (
       dataMessage;
 
    // блок проверок from - кто прислал
-   if (from.id) {
+   if (true) {
       messageArray.push(`👤 <b>You</b>\n├<b>id:</b> <code>${from.id}</code>`);
-   }
-   if (from.is_bot) {
       messageArray.push(`├<b>is bot:</b> ${from.is_bot}`);
-   }
-   if (from.first_name) {
       messageArray.push(`├<b>first name:</b> ${from.first_name}`);
    }
    if (from.last_name) {
@@ -179,20 +175,16 @@ export const makeStandartMessage = (
    if (from.language_code) {
       messageArray.push(`├<b>language:</b> ${from.language_code}`);
    }
-   if (from.is_premium) {
+   if (true) {
       messageArray.push(`└<b>is premium:</b> ${from.is_premium}\n`);
    }
 
    // блок проверок forward_from - от кого сообщение
    if (forward_from.id) {
       messageArray.push(
-         `👤 <b>Forward message</b>\n├<b>id:</b> <code>${forward_from.id}</code>`
+         `👤 <b>Forward message from</b>\n├<b>id:</b> <code>${forward_from.id}</code>`
       );
-   }
-   if (forward_from.is_bot) {
       messageArray.push(`├<b>is bot:</b> ${forward_from.is_bot}`);
-   }
-   if (forward_from.first_name) {
       messageArray.push(`├<b>first name:</b> ${forward_from.first_name}`);
    }
    if (forward_from.last_name) {
@@ -204,7 +196,7 @@ export const makeStandartMessage = (
    if (forward_from.language_code) {
       messageArray.push(`├<b>language:</b> ${forward_from.language_code}`);
    }
-   if (forward_from.is_premium) {
+   if (true) {
       messageArray.push(`└<b>is premium:</b> ${forward_from.is_premium}\n`);
    }
 
