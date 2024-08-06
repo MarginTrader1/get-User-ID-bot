@@ -162,7 +162,7 @@ export const makeStandartMessage = (
 
    // блок проверок from - кто прислал
    if (from.id) {
-      messageArray.push(`👤 You\n├<b>id:</b> <code>${from.id}</code>`);
+      messageArray.push(`👤 <b>You</b>\n├<b>id:</b> <code>${from.id}</code>`);
    }
    if (from.is_bot) {
       messageArray.push(`├<b>is bot:</b> ${from.is_bot}`);
@@ -186,7 +186,7 @@ export const makeStandartMessage = (
    // блок проверок forward_from - от кого сообщение
    if (forward_from.id) {
       messageArray.push(
-         `👤 Forward message\n├<b>id:</b> <code>${forward_from.id}</code>`
+         `👤 <b>Forward message</b>\n├<b>id:</b> <code>${forward_from.id}</code>`
       );
    }
    if (forward_from.is_bot) {
@@ -212,7 +212,7 @@ export const makeStandartMessage = (
    if (forward_date) {
       const { day, month, year } = getDateFromUnix(forward_date);
       messageArray.push(
-         `📃 Message\n└<b>message date:</b> ${checkDate(day)}.${checkDate(
+         `📃 <b>Message</b>\n└<b>message date:</b> ${checkDate(day)}.${checkDate(
             month
          )}.${checkDate(year)}\n`
       );
