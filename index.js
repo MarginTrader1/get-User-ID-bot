@@ -79,7 +79,11 @@ const bot = new TelegramApi(token, { polling: true });
          /* Проверка на пересылку */
          if (msg.forward_origin) {
             try {
-               const standartMessage = makeStandartMessage(msg);
+               const standartMessage = makeStandartMessage(
+                  msg,
+                  getDateFromUnix,
+                  checkDate
+               );
                await bot.sendMessage(chatId, standartMessage, {
                   parse_mode: "HTML", // для форматирования текста
                });
