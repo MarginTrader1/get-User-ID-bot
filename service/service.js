@@ -155,62 +155,130 @@ export const makeStandartMessage = (
    getDateFromUnix,
    checkDate
 ) => {
-   let messageArray = [];
+   if (dataMessage.forward_origin.type === "user") {
+      let messageArray = [];
 
-   const { from, chat, date, forward_origin, forward_from, forward_date } =
-      dataMessage;
+      const { from, chat, date, forward_origin, forward_from, forward_date } =
+         dataMessage;
 
-   // блок проверок from - кто прислал
-   if (true) {
-      messageArray.push(`👤 <b>You</b>\n├<b>id:</b> <code>${from.id}</code>`);
-      messageArray.push(`├<b>is bot:</b> ${from.is_bot}`);
-      messageArray.push(`├<b>first name:</b> ${from.first_name}`);
-   }
-   if (from.last_name) {
-      messageArray.push(`├<b>last name:</b> ${from.last_name}`);
-   }
-   if (from.username) {
-      messageArray.push(`├<b>username:</b> @${from.username}`);
-   }
-   if (from.language_code) {
-      messageArray.push(`├<b>language:</b> ${from.language_code}`);
-   }
-   if (true) {
-      const isPremium = !from.is_premium ? false : true;
-      messageArray.push(`└<b>is premium:</b> ${isPremium}\n`);
+      // блок проверок from - кто прислал
+      if (true) {
+         messageArray.push(
+            `👤 <b>You</b>\n├<b>id:</b> <code>${from.id}</code>`
+         );
+         messageArray.push(`├<b>is bot:</b> ${from.is_bot}`);
+         messageArray.push(`├<b>first name:</b> ${from.first_name}`);
+      }
+      if (from.last_name) {
+         messageArray.push(`├<b>last name:</b> ${from.last_name}`);
+      }
+      if (from.username) {
+         messageArray.push(`├<b>username:</b> @${from.username}`);
+      }
+      if (from.language_code) {
+         messageArray.push(`├<b>language:</b> ${from.language_code}`);
+      }
+      if (true) {
+         const isPremium = from.is_premium === undefined ? false : true;
+         messageArray.push(`└<b>is premium:</b> ${isPremium}\n`);
+      }
+
+      // блок проверок forward_from - от кого сообщение
+      if (forward_from.id) {
+         messageArray.push(
+            `👤 <b>Forward message from</b>\n├<b>id:</b> <code>${forward_from.id}</code>`
+         );
+         messageArray.push(`├<b>is bot:</b> ${forward_from.is_bot}`);
+         messageArray.push(`├<b>first name:</b> ${forward_from.first_name}`);
+      }
+      if (forward_from.last_name) {
+         messageArray.push(`├<b>last name:</b> ${forward_from.last_name}`);
+      }
+      if (forward_from.username) {
+         messageArray.push(`├<b>username:</b> @${forward_from.username}`);
+      }
+      if (forward_from.language_code) {
+         messageArray.push(`├<b>language:</b> ${forward_from.language_code}`);
+      }
+      if (true) {
+         console.log();
+         const isPremium = forward_from.is_premium === undefined ? false : true;
+         messageArray.push(`└<b>is premium:</b> ${isPremium}\n`);
+      }
+
+      // date
+      if (forward_date) {
+         const { day, month, year } = getDateFromUnix(forward_date);
+         messageArray.push(
+            `📃 <b>Message</b>\n└<b>message date:</b> ${checkDate(
+               day
+            )}.${checkDate(month)}.${checkDate(year)}\n`
+         );
+      }
+      return messageArray.join("\n");
    }
 
-   // блок проверок forward_from - от кого сообщение
-   if (forward_from.id) {
-      messageArray.push(
-         `👤 <b>Forward message from</b>\n├<b>id:</b> <code>${forward_from.id}</code>`
-      );
-      messageArray.push(`├<b>is bot:</b> ${forward_from.is_bot}`);
-      messageArray.push(`├<b>first name:</b> ${forward_from.first_name}`);
-   }
-   if (forward_from.last_name) {
-      messageArray.push(`├<b>last name:</b> ${forward_from.last_name}`);
-   }
-   if (forward_from.username) {
-      messageArray.push(`├<b>username:</b> @${forward_from.username}`);
-   }
-   if (forward_from.language_code) {
-      messageArray.push(`├<b>language:</b> ${forward_from.language_code}`);
-   }
-   if (true) {
-      const isPremium = !from.is_premium ? false : true;
-      messageArray.push(`└<b>is premium:</b> ${isPremium}\n`);
-   }
+   if (dataMessage.forward_origin.type === "channel") {
+      let messageArray = [];
 
-   // date
-   if (forward_date) {
-      const { day, month, year } = getDateFromUnix(forward_date);
-      messageArray.push(
-         `📃 <b>Message</b>\n└<b>message date:</b> ${checkDate(
-            day
-         )}.${checkDate(month)}.${checkDate(year)}\n`
-      );
-   }
+      const {
+         from,
+         chat,
+         date,
+         forward_origin,
+         forward_from_chat,
+         forward_from_message_id,
+         forward_signature,
+         forward_date,
+      } = dataMessage;
 
-   return messageArray.join("\n");
+      // блок проверок from - кто прислал
+      if (true) {
+         messageArray.push(
+            `👤 <b>You</b>\n├<b>id:</b> <code>${from.id}</code>`
+         );
+         messageArray.push(`├<b>is bot:</b> ${from.is_bot}`);
+         messageArray.push(`├<b>first name:</b> ${from.first_name}`);
+      }
+      if (from.last_name) {
+         messageArray.push(`├<b>last name:</b> ${from.last_name}`);
+      }
+      if (from.username) {
+         messageArray.push(`├<b>username:</b> @${from.username}`);
+      }
+      if (from.language_code) {
+         messageArray.push(`├<b>language:</b> ${from.language_code}`);
+      }
+      if (true) {
+         const isPremium = from.is_premium === undefined ? false : true;
+         messageArray.push(`└<b>is premium:</b> ${isPremium}\n`);
+      }
+
+      // блок проверок forward_origin - от кого сообщение
+      if (forward_origin) {
+         messageArray.push(
+            `📃 <b>Forward message from</b>\n├<b>id:</b> <code>${forward_origin.chat.id}</code>`
+         );
+         messageArray.push(`├<b>type:</b> ${forward_origin.type}`);
+         messageArray.push(`├<b>title:</b> ${forward_origin.chat.title}`);
+         messageArray.push(
+            `├<b>username:</b> @${forward_origin.chat.username}`
+         );
+      }
+      if (forward_origin.author_signature) {
+         messageArray.push(
+            `├<b>author:</b> ${forward_origin.author_signature}`
+         );
+      }
+      if (true) {
+         messageArray.push(`├<b>post id:</b> ${forward_origin.message_id}`);
+         const { day, month, year } = getDateFromUnix(forward_origin.date);
+         messageArray.push(
+            `└<b>post date:</b> ${checkDate(
+               day
+            )}.${checkDate(month)}.${checkDate(year)}\n`
+         );
+      }
+      return messageArray.join("\n");
+   }
 };

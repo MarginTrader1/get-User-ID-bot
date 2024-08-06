@@ -120,9 +120,6 @@ const bot = new TelegramApi(token, { polling: true });
             // id из базы данных
             const user_id = user_id_database[chatId];
 
-            console.log(user_id_database)
-            console.log(user_id_database[chatId])
-
             // Задержка между запросами 3 секунды
             await delay(3000);
 
@@ -148,7 +145,6 @@ const bot = new TelegramApi(token, { polling: true });
                parse_mode: "HTML", // для форматирования текста
                disable_web_page_preview: true, // чтобы отключить предварительный просмотр ссылок
             });
-
             return;
          }
       } catch (error) {}
