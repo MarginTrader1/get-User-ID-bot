@@ -199,7 +199,7 @@ export const makeStandartMessage = (
       messageArray.push(`├<b>last name:</b> ${forward_from.last_name}`);
    }
    if (forward_from.username) {
-      messageArray.push(`├<b>username:</b> @${username}`);
+      messageArray.push(`├<b>username:</b> @${forward_from.username}`);
    }
    if (forward_from.language_code) {
       messageArray.push(`├<b>language:</b> ${language_code}`);
