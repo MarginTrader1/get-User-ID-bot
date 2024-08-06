@@ -176,7 +176,7 @@ export const makeStandartMessage = (
       messageArray.push(`├<b>language:</b> ${from.language_code}`);
    }
    if (true) {
-      const isPremium = from.is_premium === true ? true : false;
+      const isPremium = !from.is_premium ? false : true;
       messageArray.push(`└<b>is premium:</b> ${isPremium}\n`);
    }
 
@@ -198,7 +198,7 @@ export const makeStandartMessage = (
       messageArray.push(`├<b>language:</b> ${forward_from.language_code}`);
    }
    if (true) {
-      const isPremium = from.is_premium === true ? true : false;
+      const isPremium = !from.is_premium ? false : true;
       messageArray.push(`└<b>is premium:</b> ${isPremium}\n`);
    }
 
