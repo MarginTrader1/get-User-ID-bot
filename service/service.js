@@ -201,7 +201,6 @@ export const makeStandartMessage = (
          messageArray.push(`├<b>language:</b> ${forward_from.language_code}`);
       }
       if (true) {
-         console.log();
          const isPremium = forward_from.is_premium === undefined ? false : true;
          messageArray.push(`└<b>is premium:</b> ${isPremium}\n`);
       }
@@ -271,10 +270,10 @@ export const makeStandartMessage = (
          );
       }
       if (true) {
-         messageArray.push(`├<b>post id:</b> ${forward_origin.message_id}`);
+         messageArray.push(`├<b>message id:</b> ${forward_origin.message_id}`);
          const { day, month, year } = getDateFromUnix(forward_origin.date);
          messageArray.push(
-            `└<b>post date:</b> ${checkDate(
+            `└<b>massage date:</b> ${checkDate(
                day
             )}.${checkDate(month)}.${checkDate(year)}\n`
          );
