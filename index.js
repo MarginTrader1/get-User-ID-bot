@@ -114,7 +114,7 @@ const bot = new TelegramApi(token, { polling: true });
 
          const data = query.data;
          const chatId = query.from.id;
-         const chatType = msg.chat.type;
+         const chatType = query.message.chat.type;
 
          /* Кнопка - вернуться назад */
          if (data === "/more_info" && chatType === "private") {
@@ -152,6 +152,8 @@ const bot = new TelegramApi(token, { polling: true });
 
             return;
          }
-      } catch (error) {}
+      } catch (error) {
+         console.log(error);
+      }
    });
 })();
