@@ -273,9 +273,57 @@ export const makeStandartMessage = (
          messageArray.push(`├<b>message id:</b> ${forward_origin.message_id}`);
          const { day, month, year } = getDateFromUnix(forward_origin.date);
          messageArray.push(
-            `└<b>massage date:</b> ${checkDate(
-               day
-            )}.${checkDate(month)}.${checkDate(year)}\n`
+            `└<b>massage date:</b> ${checkDate(day)}.${checkDate(
+               month
+            )}.${checkDate(year)}\n`
+         );
+      }
+      return messageArray.join("\n");
+   }
+
+   if (dataMessage.forward_origin.type === "chat") {
+      let messageArray = [];
+
+      const { from, forward_origin } = dataMessage;
+
+      // блок проверок from - кто прислал
+      if (true) {
+         messageArray.push(
+            `👤 <b>You</b>\n├<b>id:</b> <code>${from.id}</code>`
+         );
+         messageArray.push(`├<b>is bot:</b> ${from.is_bot}`);
+         messageArray.push(`├<b>first name:</b> ${from.first_name}`);
+      }
+      if (from.last_name) {
+         messageArray.push(`├<b>last name:</b> ${from.last_name}`);
+      }
+      if (from.username) {
+         messageArray.push(`├<b>username:</b> @${from.username}`);
+      }
+      if (from.language_code) {
+         messageArray.push(`├<b>language:</b> ${from.language_code}`);
+      }
+      if (true) {
+         const isPremium = from.is_premium === undefined ? false : true;
+         messageArray.push(`└<b>is premium:</b> ${isPremium}\n`);
+      }
+
+      // блок проверок forward_origin - от кого сообщение
+      if (forward_origin) {
+         const { day, month, year } = getDateFromUnix(forward_origin.date);
+
+         messageArray.push(
+            `📃 <b>Forward message from</b>\n├<b>id:</b> <code>${forward_origin.sender_chat.id}</code>`
+         );
+         messageArray.push(`├<b>type:</b> ${forward_origin.type}`);
+         messageArray.push(
+            `├<b>title:</b> ${forward_origin.sender_chat.title}`
+         );
+         messageArray.push(`├<b>username:</b> hidden admin`);
+         messageArray.push(
+            `└<b>massage date:</b> ${checkDate(day)}.${checkDate(
+               month
+            )}.${checkDate(year)}\n`
          );
       }
       return messageArray.join("\n");

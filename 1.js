@@ -112,3 +112,32 @@
   forward_date: 1722845033,
   text: 'Я всегда вижу, биткоин это ожидания сиплого, если думать так - работает'
 }
+
+сообщение о закрытого админа в чате 
+
+{
+  message_id: 454,
+  from: {
+    id: 1061235651,
+    is_bot: false,
+    first_name: 'Margin Trader',
+    username: 'crypto_big_boss',
+    language_code: 'ru',
+    is_premium: true
+  },
+  chat: {
+    id: 1061235651,
+    first_name: 'Margin Trader',
+    username: 'crypto_big_boss',
+    type: 'private'
+  },
+  date: 1723002600,
+  forward_origin: {
+    type: 'chat',
+    sender_chat: { id: -1001107495113, title: 'Чат', type: 'supergroup' },
+    date: 1722952546
+  },
+  forward_from_chat: { id: -1001107495113, title: 'Чат', type: 'supergroup' },
+  forward_date: 1722952546,
+  text: 'А мне чтобы все проекты выполнять, нужно всего 2000 учеников обучить'
+}

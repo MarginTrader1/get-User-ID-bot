@@ -38,10 +38,11 @@ const bot = new TelegramApi(token, { polling: true });
    const client = new TelegramClient(stringSession, apiId, apiHash, {
       connectionRetries: 5,
    });
-
+   delay(2000);
    await client.start({
       botAuthToken: token,
    });
+   delay(2000);
    console.log(client.session.save());
 
    /* Список команд для бота */
