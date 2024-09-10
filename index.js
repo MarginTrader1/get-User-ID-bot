@@ -51,7 +51,7 @@ const bot = new TelegramApi(token, { polling: true });
    /* Чтение сообщений */
    bot.on("message", async (msg) => {
       try {
-         console.log(msg);
+         // console.log(msg);
 
          const message = msg.text;
          const chatType = msg.chat.type;
@@ -111,7 +111,7 @@ const bot = new TelegramApi(token, { polling: true });
 
    bot.on("callback_query", async (query) => {
       try {
-         console.log(query);
+         // console.log(query);
 
          const data = query.data;
          const chatId = query.from.id;
